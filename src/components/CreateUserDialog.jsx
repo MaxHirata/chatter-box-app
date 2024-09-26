@@ -3,7 +3,10 @@ import { ChatContext } from "../context/chatContext"
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField } from "@mui/material";
 
 const CreateUserDialog = ({ open, onClose }) => {
-    const { handleCreateUser } = useContext(ChatContext);
+    const { 
+        handleCreateUser ,
+        userHash
+    } = useContext(ChatContext);
     
     const [userName, setUserName] = useState('');
 
@@ -14,7 +17,9 @@ const CreateUserDialog = ({ open, onClose }) => {
                 <DialogContentText>
                     Enter the name of the new user:
                 </DialogContentText>
-                <TextField/>
+                <TextField
+                    onChange={ e => setUserName(e.target.value) }
+                />
             </DialogContent>
             <DialogActions>
                 <Button 
@@ -23,7 +28,7 @@ const CreateUserDialog = ({ open, onClose }) => {
                     Cancel
                 </Button>
                 <Button 
-                    onClick={() => console.log("handle create a new user")}
+                    onClick={() => { handleCreateUser(userName) }}
                 >
                     Save
                 </Button>
