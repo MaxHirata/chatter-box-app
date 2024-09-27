@@ -107,7 +107,7 @@ const ChatContextProvider = ({ children }) => {
         userIds.forEach(userId => {
             updatedUserHash[userId].involvedChats.push(chatId);
         })
-        
+
         setUserHash(updatedUserHash);
         setChatHash(updatedChatHash);
         setCurrentChat(chatId); // After chat is create it becomes the new current chat
@@ -115,7 +115,20 @@ const ChatContextProvider = ({ children }) => {
 
     const handleDeleteChat = (chatId) => {
         let updatedChatHash = {...chatHash};
+        let updatedUserHash = {...userHash};
+
+        // Remove the chatId in each of the chat's participant's users' involvedChat list
+        updatedChatHash[chatId].participantIds.forEach(participantId => {
+            let userInvolvedChatList = updatedUserHash[participantId].involvedChats;
+            const deletedChatIdIndex = userInvolvedChatList.indexOf(chatId);
+            const updatedInvolvedChatList = userInvolvedChatList.splice(deletedChatIdIndex, 1);
+            updatedUserHash[participantId].involvedChats = updatedInvolvedChatList;
+        })
+
+        // delete the chat object 
         delete updatedChatHash[chatId];
+
+        setUserHash(updatedUserHash);
         setChatHash(updatedChatHash);
     }
 

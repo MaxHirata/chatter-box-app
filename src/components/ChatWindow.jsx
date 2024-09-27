@@ -41,6 +41,16 @@ const ChatWindow = () => {
                     overflowX: 'scroll'
                 }}
             >
+                <Box 
+                    sx={{ 
+                        fontSize: 18, 
+                        fontWeight: 600, 
+                        textDecoration: 'underline',
+                        marginBottom: '8px',
+                    }} 
+                >
+                    {currentChatLogs.name}
+                </Box>
                 {currentChatLogs.chatLogs?.map( (chatLog, index) => {
                     const sender = chatLog.senderName;
                     const message = chatLog.message;

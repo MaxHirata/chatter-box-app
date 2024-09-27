@@ -1,8 +1,9 @@
-import { Box, Button } from "@mui/material";
+import { Box, Button, IconButton } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import { ChatContext } from "../context/chatContext";
 import CreateChatDialog from "./CreateChatDialog";
-import { Add } from "@mui/icons-material";
+import { Add, Delete } from "@mui/icons-material";
+import DeleteChatDialog from "./DeleteChatDialog";
 
 const LeftNav = () => {
 
@@ -16,6 +17,8 @@ const LeftNav = () => {
 
     const [currentChatLogs, setCurrentChatLogs] = useState(chatHash[currentChat] ?? []);
     const [openCreateChatDialog, setOpenCreateChatDialog] = useState(false);
+    const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
+    const [chatToDelete, setChatToDelete] = useState(null);
 
     useEffect(() => {
         setCurrentChatLogs(chatHash[currentChat])
@@ -60,30 +63,47 @@ const LeftNav = () => {
                     {currUser.involvedChats.map((chatId, idx) => {
                     const chat = chatHash[chatId];
                     return(
+                        <Box 
+                            key={idx}
+                            sx={{ display: 'flex',justifyContent: 'flex-start', alignItems: 'center' }}
+                        >
                             <Box 
                                 sx={{
-                                    border: '2px solid #515761',
+                                    border: `2px solid ${chatId === currentChat ? 'red' : '#515761'}`,
+                                    borderRadius: '6px',
+                                    padding: '4px 8px',
                                     margin: '5px 10px'
                                 }}
-                                key={idx}
                                 onClick={() => handleSelectCurrentChat(chatId)}
                             >
-                                {chat.name}
+                              {chat.name}
                             </Box>
+                            <IconButton
+                                    size="small"
+                                    onClick={() => {
+                                        setChatToDelete(chatId);
+                                        setOpenDeleteDialog(true);
+                                    }}
+                                >
+                                <Delete fontSize="inherit"/>
+                            </IconButton>
+                        </Box>
                         );
                     })}
                 </Box>
 
                 <Box>
                     <Button
+                        variant="contained"
                         onClick={() => setOpenCreateChatDialog(!openCreateChatDialog)}
                         startIcon={<Add/>}
                     >
                         Create Chat
                     </Button>
-                    <CreateChatDialog open={openCreateChatDialog} onClose={() => setOpenCreateChatDialog(false)} />
                 </Box>
             </Box>
+            <CreateChatDialog open={openCreateChatDialog} onClose={() => setOpenCreateChatDialog(false)} />
+            <DeleteChatDialog chatId={chatToDelete} open={openDeleteDialog} onClose={() => setOpenDeleteDialog(false)} />
         </Box>
     );
 }
