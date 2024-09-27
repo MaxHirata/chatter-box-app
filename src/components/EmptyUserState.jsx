@@ -41,10 +41,7 @@ const EmptyUserState = () => {
                 }}
                 variant="contained"
                 startIcon={<PersonAdd/>}
-                onClick={() => {
-                    console.log("Create User Dialog Should OPen Up");
-                    setOpenCreateUserDialog(true);
-                }}
+                onClick={() => {setOpenCreateUserDialog(true);}}
             >
                 Create User
             </Button>

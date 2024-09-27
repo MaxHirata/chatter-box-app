@@ -11,16 +11,21 @@ const ChatContextProvider = ({ children }) => {
     const [chatHash, setChatHash] = useState({});
 
     const init = () => {
+        console.log("init!!");
         const userKeys = Object.keys(userHash);
         if(userKeys.length) {
             const firstUserId = userKeys[0];
             const user = userHash[firstUserId];
             setCurrentUser(user.id);
 
+            console.log("init current user obj: ", user);
+
             // then set the first chat as the default selected
-            if(user.involvedChats?.length) {
-                const firstUserChatId = user.involvedChats[0];
-                setCurrentChat(firstUserChatId);
+            if(user.involvedChats?.length > 0) {
+                
+                const firstChatId = user.involvedChats[0];
+                console.log("Setting currentChat on init: ", firstChatId);
+                setCurrentChat(firstChatId);
             }
         }
     }
@@ -56,6 +61,10 @@ const ChatContextProvider = ({ children }) => {
         let updatedUserHash = {...userHash};
         updatedUserHash[userId] = newUser;
         setUserHash(updatedUserHash);
+
+        // After create set the new user as current and new chat as current
+        setCurrentUser(userId);
+        setCurrentChat(chatId);
     }
 
     const handleSwitchUser = (userId) => {
@@ -111,7 +120,6 @@ const ChatContextProvider = ({ children }) => {
 
         let updatedChatHash = {...chatHash};
         updatedChatHash[chatId].chatLogs.push(newMessage);
-        console.log("After message sent: ", updatedChatHash[chatId]);
         setChatHash(updatedChatHash);
     }
 

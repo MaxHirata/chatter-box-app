@@ -5,19 +5,14 @@ import ChatWindow from "./ChatWindow";
 
 const ChatView = () => {
     const { 
-        init,
         selectedUser,
+        selectedChat,
         userHash,
         handleCreateUser,
         handleSwitchUser
     } = useContext(ChatContext);
 
     const userIds = Object.keys(userHash);
-    console.log("userIds: ", userIds);
-    
-    useEffect(() => {
-        init();
-    }, []);
 
     return (
         <Box
@@ -48,6 +43,7 @@ const ChatView = () => {
                     const user = userHash[userId];
                     return (
                         <Box
+                            key={userId}
                             sx={{
                                 border: '3px solid red',
                                 borderRadius: '12px',

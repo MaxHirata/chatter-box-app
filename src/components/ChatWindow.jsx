@@ -12,22 +12,13 @@ const ChatWindow = () => {
         handleSendMessage
     } = useContext(ChatContext);
 
-    // console.log({currentUser});
-    // console.log({currentChat});
-    // console.log({chatHash});
-    const [currentChatLogs, setCurrentChatLogs] = useState(chatHash[currentChat]);
+    const [currentChatLogs, setCurrentChatLogs] = useState(chatHash[currentChat] ?? []);
     const [messageText, setMessageText] = useState('');
-
-    console.log({currentChatLogs});
 
     const sendMessage = () => {
         handleSendMessage(currentUser, currentChat, messageText);
         setMessageText('');    
     }
-
-    useEffect(() => {
-
-    }, [])
 
     return (
         <Box 
@@ -46,12 +37,13 @@ const ChatWindow = () => {
                     overflowX: 'scroll'
                 }}
             >
-                {currentChatLogs.chatLogs.map( (chatLog, index) => {
+                {currentChatLogs.chatLogs?.map( (chatLog, index) => {
                     const sender = chatLog.senderName;
                     const message = chatLog.message;
                     const timeStamp = chatLog.timeStamp;
                     return (
                         <Box
+                            key={index}
                             sx={{
                                 display: 'flex',
                                 justifyContent: 'space-between'
