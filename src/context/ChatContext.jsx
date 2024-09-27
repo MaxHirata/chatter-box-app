@@ -30,8 +30,10 @@ const ChatContextProvider = ({ children }) => {
     const handleSelectCurrentChat = (chatId) => { setCurrentChat(chatId) }
 
     const handleCreateUser = (name) => {
-        // Create a self private chat so the new user can chat to them selves
         const chatId = uuid();
+        const userId = uuid();
+
+        // Create a self private chat so the new user can chat to them selves
         const selfChat = {
             id: chatId,
             name: 'self private chat',
@@ -40,7 +42,6 @@ const ChatContextProvider = ({ children }) => {
         }
 
         // Create New User
-        const userId = uuid();
         const newUser = {
             id: userId,
             name: name,

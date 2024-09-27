@@ -1,7 +1,7 @@
-import { Box } from '@mui/material';
 import React, { useContext } from 'react'
 import { ChatContext } from '../context/chatContext';
 import EmptyUserState from './EmptyUserState';
+import ChatView from './ChatView';
 
 function ChatContainer() {
     const {
@@ -14,7 +14,7 @@ function ChatContainer() {
 
     return (
         <>
-            {numUsers < 1 ? <EmptyUserState/> : <Box>Hello WOrld!!!</Box>}
+            {numUsers < 1 ? <EmptyUserState/> : <ChatView/>}
         </>
     );
 };
