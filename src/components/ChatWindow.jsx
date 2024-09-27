@@ -23,7 +23,6 @@ const ChatWindow = () => {
         setMessageText('');    
     }
 
-
     return (
         <Box 
             sx={{ 

@@ -15,17 +15,16 @@ const LeftNav = () => {
         handleSelectCurrentChat,
     } = useContext(ChatContext);
 
-    const [currentChatLogs, setCurrentChatLogs] = useState(chatHash[currentChat] ?? []);
     const [openCreateChatDialog, setOpenCreateChatDialog] = useState(false);
     const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
     const [chatToDelete, setChatToDelete] = useState(null);
+    const [currUser, setCurrUser] = useState(userHash[currentUser]);
 
     useEffect(() => {
-        setCurrentChatLogs(chatHash[currentChat])
-    }, [currentChat, chatHash])
+        setCurrUser(userHash[currentUser]);
+    }, [currentUser, chatHash, userHash])
 
     const userIds = Object.keys(userHash);
-    const currUser = userHash[currentUser];
 
     return (
         <Box
@@ -58,7 +57,6 @@ const LeftNav = () => {
             </Box>
             <Box sx={{ height: '50%' }}>
                 <Box sx={{ fontWeight: 600, marginTop: 2, marginBottom: 2 }}>Chat List</Box>
-
                 <Box>
                     {currUser.involvedChats.map((chatId, idx) => {
                     const chat = chatHash[chatId];
@@ -102,8 +100,18 @@ const LeftNav = () => {
                     </Button>
                 </Box>
             </Box>
-            <CreateChatDialog open={openCreateChatDialog} onClose={() => setOpenCreateChatDialog(false)} />
-            <DeleteChatDialog chatId={chatToDelete} open={openDeleteDialog} onClose={() => setOpenDeleteDialog(false)} />
+            <CreateChatDialog 
+                open={openCreateChatDialog} 
+                onClose={() => setOpenCreateChatDialog(false)} 
+            />
+            <DeleteChatDialog 
+                chatId={chatToDelete} 
+                open={openDeleteDialog} 
+                onClose={() => {
+                    setOpenDeleteDialog(false);
+                    setChatToDelete(null);
+                }} 
+            />
         </Box>
     );
 }

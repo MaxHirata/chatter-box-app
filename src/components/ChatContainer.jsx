@@ -5,12 +5,9 @@ import ChatView from './ChatView';
 import { Box } from '@mui/material';
 
 function ChatContainer() {
-    const {
-        userHash,
-        handleCreateUser,
-        handleDeleteUser
-    } = useContext(ChatContext);
 
+    const { userHash } = useContext(ChatContext);
+    
     const numUsers = Object.keys(userHash).length;
 
     return (

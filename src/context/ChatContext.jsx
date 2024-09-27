@@ -10,26 +10,6 @@ const ChatContextProvider = ({ children }) => {
     const [userHash, setUserHash] = useState({});
     const [chatHash, setChatHash] = useState({});
 
-    const init = () => {
-        console.log("init!!");
-        const userKeys = Object.keys(userHash);
-        if(userKeys.length) {
-            const firstUserId = userKeys[0];
-            const user = userHash[firstUserId];
-            setCurrentUser(user.id);
-
-            console.log("init current user obj: ", user);
-
-            // then set the first chat as the default selected
-            if(user.involvedChats?.length > 0) {
-                
-                const firstChatId = user.involvedChats[0];
-                console.log("Setting currentChat on init: ", firstChatId);
-                setCurrentChat(firstChatId);
-            }
-        }
-    }
-
     const handleSelectCurrentUser = (userId) => { setCurrentUser(userId) }
 
     const handleSelectCurrentChat = (chatId) => { setCurrentChat(chatId) }
@@ -121,8 +101,7 @@ const ChatContextProvider = ({ children }) => {
         updatedChatHash[chatId].participantIds.forEach(participantId => {
             let userInvolvedChatList = updatedUserHash[participantId].involvedChats;
             const deletedChatIdIndex = userInvolvedChatList.indexOf(chatId);
-            const updatedInvolvedChatList = userInvolvedChatList.splice(deletedChatIdIndex, 1);
-            updatedUserHash[participantId].involvedChats = updatedInvolvedChatList;
+            userInvolvedChatList.splice(deletedChatIdIndex, 1);
         })
 
         // delete the chat object 
@@ -151,7 +130,6 @@ const ChatContextProvider = ({ children }) => {
             currentChat,
             userHash,
             chatHash,
-            init,
             handleSwitchUser,
             handleSelectCurrentUser,
             handleSelectCurrentChat,

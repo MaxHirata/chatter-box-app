@@ -5,6 +5,7 @@ import { Chat, PersonAdd } from "@mui/icons-material";
 import CreateUserDialog from "./CreateUserDialog";
 
 const EmptyUserState = () => {
+    
     const [ openCreateUserDialog, setOpenCreateUserDialog ] = useState(false);
 
     return (
