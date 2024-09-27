@@ -10,7 +10,7 @@ const EmptyChatState = () => {
                 justifyContent: 'center',
                 alignItems: 'center',
                 padding: 3,
-                width: 400
+                width: '70%', 
             }}
         >
             <Chat sx={{ fontSize: 80 }}/>
