@@ -102,7 +102,15 @@ const ChatContextProvider = ({ children }) => {
         }
         let updatedChatHash = {...chatHash};
         updatedChatHash[chatId] = newChat;
+
+        let updatedUserHash = {...userHash};
+        userIds.forEach(userId => {
+            updatedUserHash[userId].involvedChats.push(chatId);
+        })
+        
+        setUserHash(updatedUserHash);
         setChatHash(updatedChatHash);
+        setCurrentChat(chatId); // After chat is create it becomes the new current chat
     }
 
     const handleDeleteChat = (chatId) => {
