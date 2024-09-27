@@ -3,10 +3,7 @@ import { ChatContext } from "../context/chatContext"
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField } from "@mui/material";
 
 const CreateUserDialog = ({ open, onClose }) => {
-    const { 
-        handleCreateUser ,
-        userHash
-    } = useContext(ChatContext);
+    const { handleCreateUser } = useContext(ChatContext);
     
     const [userName, setUserName] = useState('');
 
