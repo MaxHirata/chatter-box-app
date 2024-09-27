@@ -1,8 +1,14 @@
 import { Box } from "@mui/material"
 import ChatWindow from "./ChatWindow";
 import LeftNav from "./LeftNav";
+import { useContext } from "react";
+import { ChatContext } from "../context/chatContext";
+import EmptyChatState from "./EmptyChatState";
 
 const ChatView = () => {
+
+    const { currentChat } = useContext(ChatContext);
+
     return (
         <Box
             sx={{
@@ -14,7 +20,7 @@ const ChatView = () => {
             }}
         >
             <LeftNav/>
-            <ChatWindow/>
+            {currentChat ? <ChatWindow/> : <EmptyChatState/>}
         </Box>
     )
 };

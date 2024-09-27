@@ -104,6 +104,15 @@ const ChatContextProvider = ({ children }) => {
             userInvolvedChatList.splice(deletedChatIdIndex, 1);
         })
 
+        if(chatId === currentChat) {
+            // in case the current selected chat is being delete
+            if(updatedUserHash[currentUser].involvedChats.length) {
+                setCurrentChat(updatedUserHash[currentUser].involvedChats[0]);
+            } else {
+                setCurrentChat(null);
+            }
+        }
+
         // delete the chat object 
         delete updatedChatHash[chatId];
 

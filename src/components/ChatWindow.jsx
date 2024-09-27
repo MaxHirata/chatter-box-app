@@ -19,8 +19,10 @@ const ChatWindow = () => {
     }, [currentChat, chatHash])
 
     const sendMessage = () => {
-        handleSendMessage(currentUser, currentChat, messageText);
-        setMessageText('');    
+        if(messageText) {
+            handleSendMessage(currentUser, currentChat, messageText);
+            setMessageText('');
+        }
     }
 
     return (
@@ -35,9 +37,8 @@ const ChatWindow = () => {
                 sx={{
                     padding: 2,
                     height: '75%',
-                    border: '3px solid white',
-                    overflowY: 'auto',
-                    overflowX: 'scroll'
+                    border: '3px solid #4287f5',
+                    borderRadius: '16px'
                 }}
             >
                 <Box 
