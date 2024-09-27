@@ -37,7 +37,10 @@ const CreateChatDialog = ({open, onClose}) => {
                     Cancel
                 </Button>
                 <Button 
-                    onClick={() => handleCreateChat([currentUser], chatTitle)}
+                    onClick={() => {
+                        handleCreateChat([currentUser], chatTitle);
+                        onClose();
+                    }}
                 >
                     Save
                 </Button>
