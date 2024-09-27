@@ -102,7 +102,7 @@ const ChatContextProvider = ({ children }) => {
         setChatHash(updatedChatHash);
     }
 
-    const handleSendMessage = (chatId, userId, message) => {
+    const handleSendMessage = (userId, chatId, message) => {
         const newMessage = {
             senderName: userHash[userId].name,
             message: message,
@@ -111,6 +111,7 @@ const ChatContextProvider = ({ children }) => {
 
         let updatedChatHash = {...chatHash};
         updatedChatHash[chatId].chatLogs.push(newMessage);
+        console.log("After message sent: ", updatedChatHash[chatId]);
         setChatHash(updatedChatHash);
     }
 

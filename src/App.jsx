@@ -6,8 +6,6 @@ import ChatContainer from './components/ChatContainer'
 import ChatContextProvider from './context/chatContext'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <ChatContextProvider>
       <ChatContainer/>
