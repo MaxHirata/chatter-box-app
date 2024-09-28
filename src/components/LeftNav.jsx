@@ -33,12 +33,22 @@ const LeftNav = () => {
                 flexDirection: 'column',
                 justifyContent: 'space-between',
                 width: '30%',
-                border: '5px solid #5c6169',
-                background: '#5c6169',
+                borderRadius: '16px',
                 color: 'white'
             }}
         >
-            <Box>
+            <Box
+                sx={{
+                    height: '20%', 
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    padding: '16px 8px',
+                    background: '#5c6169',
+                    borderRadius: '16px',
+                    marginBottom: '8px'
+                }}
+            >
                 <Box sx={{ fontWeight: 600, marginTop: 2, marginBottom: 2 }}>User List</Box>
                 { userIds.map((userId) => {
                     const user = userHash[userId];
@@ -46,6 +56,7 @@ const LeftNav = () => {
                         <Box
                             key={userId}
                             sx={{
+                                width: '180px',
                                 border: '3px solid red',
                                 borderRadius: '12px',
                                 padding: 1,
@@ -55,9 +66,20 @@ const LeftNav = () => {
                     )
                 })}
             </Box>
-            <Box sx={{ height: '50%' }}>
-                <Box sx={{ fontWeight: 600, marginTop: 2, marginBottom: 2 }}>Chat List</Box>
+            <Box 
+                sx={{ 
+                    height: '70%', 
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    padding: '16px 8px',
+                    background: '#5c6169',
+                    borderRadius: '16px',
+                }}
+            >
                 <Box>
+                    <Box sx={{ fontWeight: 600, marginTop: 2, marginBottom: 2 }}>Chat List</Box>
                     {currUser.involvedChats.map((chatId, idx) => {
                     const chat = chatHash[chatId];
                     return(
@@ -67,6 +89,7 @@ const LeftNav = () => {
                         >
                             <Box 
                                 sx={{
+                                    minWidth: '150px',
                                     border: `2px solid ${chatId === currentChat ? 'red' : '#515761'}`,
                                     borderRadius: '6px',
                                     padding: '4px 8px',
@@ -90,15 +113,14 @@ const LeftNav = () => {
                     })}
                 </Box>
 
-                <Box>
-                    <Button
-                        variant="contained"
-                        onClick={() => setOpenCreateChatDialog(!openCreateChatDialog)}
-                        startIcon={<Add/>}
-                    >
-                        Create Chat
-                    </Button>
-                </Box>
+                <Button
+                    sx={{ width: 180 }}
+                    variant="contained"
+                    onClick={() => setOpenCreateChatDialog(!openCreateChatDialog)}
+                    startIcon={<Add/>}
+                >
+                    Create Chat
+                </Button>
             </Box>
             <CreateChatDialog 
                 open={openCreateChatDialog} 
