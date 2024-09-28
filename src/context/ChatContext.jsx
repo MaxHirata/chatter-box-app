@@ -124,7 +124,7 @@ const ChatContextProvider = ({ children }) => {
         const newMessage = {
             senderName: userHash[userId].name,
             message: message,
-            timeStamp: Date.now() //TODO: format this into a readable timestamp
+            timeStamp: new Date(Date.now()).toLocaleString()
         }
 
         let updatedChatHash = {...chatHash};

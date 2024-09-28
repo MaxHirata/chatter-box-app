@@ -28,15 +28,16 @@ const ChatWindow = () => {
     return (
         <Box 
             sx={{ 
-                width: '70%', 
-                height: 'inherit' 
+                width: '80%', 
+                height: 'inherit',
+                marginLeft: '8px'
             }}
         > 
             <Box 
                 id="chat-view"
                 sx={{
                     padding: 2,
-                    height: '75%',
+                    height: '85%',
                     border: '3px solid #4287f5',
                     borderRadius: '16px'
                 }}
@@ -70,12 +71,35 @@ const ChatWindow = () => {
                     )
                 } )}
             </Box>
-            <Box>
+            <Box
+                sx={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    marginTop: '16px'
+                }}
+            >
+                <Box
+                    sx={{
+                        fontSize: 20,
+                        fontWeight: 600,
+                        marginRight: '8px'
+                    }}
+                >Message: </Box>
                 <TextField
+                    sx={{
+                        width: '70%',
+                        background: 'white',
+                        borderRadius: '8px',
+                    }}
+                    size="small"
                     value={messageText}
                     onChange={ e => setMessageText(e.target.value)}
                 />
                 <Button
+                    sx={{
+                        marginLeft: '8px'
+                    }}
                     variant="contained"
                     onClick={() => sendMessage()}
                 >Send</Button>
