@@ -57,7 +57,7 @@ const LeftNav = () => {
                             key={userId}
                             sx={{
                                 width: '180px',
-                                border: '3px solid red',
+                                border: `3px solid ${userId === currentUser ? '#4287f5' : '#515761'}`,
                                 borderRadius: '12px',
                                 padding: 1,
                                 margin: '8px 4px'
@@ -90,7 +90,7 @@ const LeftNav = () => {
                             <Box 
                                 sx={{
                                     minWidth: '150px',
-                                    border: `2px solid ${chatId === currentChat ? 'red' : '#515761'}`,
+                                    border: `2px solid ${chatId === currentChat ? '#4287f5' : '#515761'}`,
                                     borderRadius: '6px',
                                     padding: '4px 8px',
                                     margin: '5px 10px'
